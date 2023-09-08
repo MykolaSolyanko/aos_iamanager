@@ -42,7 +42,7 @@ import (
 
 const (
 	connectionTimeout     = 10 * time.Minute
-	defaultRequestTimeout = 1 * time.Minute
+	defaultRequestTimeout = 8 * time.Minute
 )
 
 /***********************************************************************************************************************
@@ -354,9 +354,12 @@ func (client *Client) sendIAMRequest(
 }
 
 func (iam *remoteIAM) getRequestTimeout() time.Duration {
-	if iam.cfg.RequestTimeout.Duration != 0 {
-		return iam.cfg.RequestTimeout.Duration
-	}
+	// if iam.cfg.RequestTimeout.Duration != 0 {
+	// 	return iam.cfg.RequestTimeout.Duration
+	// }
+
+	// return defaultRequestTimeout
+	log.Debugf("Default request timeout: %v", defaultRequestTimeout)
 
 	return defaultRequestTimeout
 }
